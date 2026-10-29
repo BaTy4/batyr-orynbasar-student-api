@@ -21,6 +21,7 @@ A Spring Boot REST API for managing student records.
 | GET | /api/students/{id} | Retrieve a student by ID |
 | PUT | /api/students/{id} | Update a student |
 | DELETE | /api/students/{id} | Delete a student |
+| GET | /api/students?name={name} | Search students by name |
 
 ## Run the Application
 
