@@ -1,0 +1,48 @@
+name: batyr-orynbasar-student-api
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: batyr-orynbasar-student-api:v1.0-batyr
+    container_name: batyr-orynbasar-api
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/studentdb
+      SPRING_DATASOURCE_USERNAME: student
+      SPRING_DATASOURCE_PASSWORD: student_dev
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - student-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:17
+    container_name: batyr-orynbasar-postgres
+    environment:
+      POSTGRES_DB: studentdb
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - student-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U student -d studentdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - student-network
+    restart: unless-stopped
+
+volumes:
+  student-data:
+
+networks:
+  student-network:
+    driver: bridge
