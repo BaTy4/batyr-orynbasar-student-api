@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -14,18 +15,16 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build and Test') {
             steps {
-                echo 'Building Spring Boot application'
-                sh 'chmod +x gradlew'
-                sh './gradlew clean bootJar --no-daemon'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running automated tests'
-                sh './gradlew test --no-daemon'
+                echo 'Building and testing with Java 21'
+                sh '''
+                    docker run --rm \
+                      -v "$WORKSPACE:/app" \
+                      -w /app \
+                      gradle:9.8.2-jdk21 \
+                      gradle clean test bootJar --no-daemon
+                '''
             }
         }
 
@@ -56,3 +55,4 @@ pipeline {
         }
     }
 }
+```
