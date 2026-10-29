@@ -18,11 +18,13 @@ pipeline {
             steps {
                 echo 'Building and testing with Java 21'
                 sh '''
-                    docker run --rm \
-                      -v "$WORKSPACE:/app" \
-                      -w /app \
-                      gradle:9.8.2-jdk21 \
-                      gradle clean test bootJar --no-daemon
+                    tar --exclude=.git --exclude=build --exclude=.gradle -czf - . | \
+                    docker run --rm -i gradle:9.8.2-jdk21 sh -c '
+                        mkdir -p /app &&
+                        tar -xzf - -C /app &&
+                        cd /app &&
+                        gradle clean test bootJar --no-daemon
+                    '
                 '''
             }
         }
