@@ -26,9 +26,15 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getAll() {
-        return repository.findAll();
+    public List<Student> getAll(
+        @RequestParam(required = false) String name) {
+
+    if (name != null && !name.isBlank()) {
+        return repository.findByNameContainingIgnoreCase(name.trim());
     }
+
+    return repository.findAll();
+}
 
     @GetMapping("/{id}")
     public ResponseEntity<Student> getById(@PathVariable Long id) {
