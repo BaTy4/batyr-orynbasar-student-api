@@ -27,3 +27,13 @@ A Spring Boot REST API for managing student records.
 
 ```bash
 docker compose up --build -d
+
+## Documentation
+
+Student API is a RESTful application built with Java 21, Spring Boot, Gradle, and PostgreSQL.
+
+The API supports creating, retrieving, updating, deleting, and searching students by name.
+
+## Developer
+
+Batyr Orynbassar
