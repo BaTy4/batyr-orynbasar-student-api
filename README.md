@@ -27,3 +27,9 @@ A Spring Boot REST API for managing student records.
 
 ```bash
 docker compose up --build -d
+
+## Project Overview
+
+Batyr Orynbassar Student API is a containerized REST API application.
+It uses Java, Spring Boot, PostgreSQL, Docker, and Docker Compose.
+The project includes automated build and testing workflows.
