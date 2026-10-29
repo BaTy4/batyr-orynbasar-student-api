@@ -31,5 +31,19 @@ docker compose up --build -d
 ## Project Overview
 
 Batyr Orynbassar Student API is a containerized REST API application.
-It uses Java, Spring Boot, PostgreSQL, Docker, and Docker Compose.
-The project includes automated build and testing workflows.
+
+It uses Java 21, Spring Boot, Gradle, PostgreSQL, Docker, and Docker Compose. The project includes automated build and testing workflows.
+
+## API Features
+
+The API supports:
+- Creating students
+- Retrieving all students
+- Retrieving a student by ID
+- Updating student information
+- Deleting students
+- Searching students by name
+
+## Developer
+
+Batyr Orynbassar
